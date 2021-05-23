@@ -21,7 +21,9 @@
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-
+use ieee.numeric_std.all;
+use IEEE.std_logic_arith.all;
+use IEEE.STD_LOGIC_UNSIGNED.all;
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
 --use IEEE.NUMERIC_STD.ALL;
@@ -32,44 +34,37 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity Sim_MUX is
- -- Port ();
+ -- Port (
+ -- clk : in s);
 end Sim_MUX;
 
 architecture Behavioral of Sim_MUX is
+
+
+signal clk : std_logic := '0';
 signal X, Y,Z,K,L  : std_logic := '0';
+signal cnt :std_logic_vector(4 downto 0):="00000";
    signal XxornYxorZmKvL : std_logic;
 begin
+clk <= not clk after 5ps;
+
+
 p1 : entity work.System
       port map(X, Y,Z,K,L, XxornYxorZmKvL);
- process
-   begin
-      wait for 5 ps;
-      X <= not X;
-   end process;
-	
-   process
-   begin
-      wait for 10 ps;
-      Y <= not Y;
-   end process;
-	
-   process
-   begin
-      wait for 20 ps;
-      Z <= not Z;
-   end process;
-	
-   process
-   begin
-      wait for 40 ps;
-      K <= not K;
-   end process;
-	
-   process
-   begin
-      wait for 80 ps;
-      L <= not L;
-   end process;
+ process(clk)
+begin
+       if rising_edge(clk) then
+       X<=cnt(0);
+       Y<=cnt(1);
+       Z<=cnt(2);
+       K<=cnt(3);
+       L<=cnt(4);
+            
+        cnt<=cnt+1;
+        
+       end if;
+      
+end process;
 	
  
 
