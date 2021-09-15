@@ -1,0 +1,9 @@
+NET "X" LOC = A10;
+NET "Y" LOC = D14;
+NET "Z" LOC = C14;
+NET "Switch_E4" LOC = E4;
+NET "Switch_T5" LOC = T5;
+NET "XxornYxorZmKvL" LOC = N12;
+NET "out_U18" LOC = U18;
+NET "K" LOC = N4;
+NET "L" LOC = F5; 
